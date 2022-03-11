@@ -12,7 +12,6 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
 
-    
     playerSelection = (playerSelection.slice(0, 1)).toUpperCase() + (playerSelection.substr(1, (playerSelection.length - 1))).toLowerCase();
 
     if (computerSelection === 'Rock') {
@@ -42,7 +41,33 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = computerPlay();
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let round = 0;
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (i = 0; i < 5; i++) {
+        let choice = prompt('Rock, paper or scissors?'); 
+        let result = playRound(choice, computerPlay())
+
+        if (result.includes('Win')) {
+            playerScore += 1;
+        } else if (result.includes('Lose')) {
+            computerScore += 1;
+        } else {
+            playerScore += 1;
+            computerScore += 1;
+        }
+        round += 1;
+    }
+
+    if (playerScore > computerScore) {
+        console.log('Yay, you win!');
+    } else if (playerScore < computerScore) {
+        console.log('You lose! better luck next time')
+    } else {
+        console.log('You tied! play again!')
+    }
+}
+
+game();
