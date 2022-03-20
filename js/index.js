@@ -6,7 +6,7 @@ let computerScore = 0;
 
 for (i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', (e) => {
-        let result = playRound(e.target.textContent, computerPlay());
+            let result = playRound(e.target.textContent, computerPlay());
             if (result.includes('Win')) {
                 playerScore += 1;
                 divDisplay();
@@ -30,22 +30,20 @@ for (i = 0; i < buttons.length; i++) {
                 <br>Computer score: ${computerScore}`;
             } 
 
-        function showWinner() {
-            if (playerScore === 5 && computerScore === 5) {
-                resultDiv.innerHTML += `<br>You tied! play again!`;
-                reset();
-            } else if (playerScore === 5) {
-                resultDiv.innerHTML += `<br>Yay, you win!`;
-                reset();
-            } else if (computerScore === 5) {
-                resultDiv.innerHTML += `<br>You lose! better luck next time`;
-                reset();
+            function showWinner() {
+                if (playerScore === 5 && computerScore === 5) {
+                    resultDiv.innerHTML += `<br>You tied! play again!`;
+                    reset();
+                } else if (playerScore === 5) {
+                    resultDiv.innerHTML += `<br>Yay, you win!`;
+                    reset();
+                } else if (computerScore === 5) {
+                    resultDiv.innerHTML += `<br>You lose! better luck next time`;
+                    reset();
+                }
             }
-        }
-
-        round += 1;      
-    });
-    
+            round += 1;      
+    });    
 }
 
 function reset() {
@@ -54,8 +52,6 @@ function reset() {
     computerScore = 0;
     resultDiv.innerHTML += ``;
 }
-
-
 
 function computerPlay() {
     let choiceNumber = Math.floor(Math.random() * 3);
@@ -67,7 +63,6 @@ function computerPlay() {
         return 'Scissors';
     }
 }
-
 
 function playRound(playerSelection, computerSelection) {
 
@@ -100,34 +95,3 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 }
-
-// function game() {
-//     let round = 0;
-//     let playerScore = 0;
-//     let computerScore = 0;
-
-//     for (i = 0; i < 5; i++) {
-//         let choice = prompt('Rock, paper or scissors?'); 
-//         let result = playRound(choice, computerPlay())
-
-//         if (result.includes('Win')) {
-//             playerScore += 1;
-//         } else if (result.includes('Lose')) {
-//             computerScore += 1;
-//         } else {
-//             playerScore += 1;
-//             computerScore += 1;
-//         }
-//         round += 1;
-//     }
-
-//     if (playerScore > computerScore) {
-//         console.log('Yay, you win!');
-//     } else if (playerScore < computerScore) {
-//         console.log('You lose! better luck next time')
-//     } else {
-//         console.log('You tied! play again!')
-//     }
-// }
-
-// game();
