@@ -7,35 +7,43 @@ let computerScore = 0;
 for (i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', (e) => {
         let result = playRound(e.target.textContent, computerPlay());
-        if (playerScore === 5 && computerScore === 5) {
-            resultDiv.innerHTML += `<br>You tied! play again!`;
-            reset();
-        } else if (playerScore === 5) {
-            resultDiv.innerHTML += `<br>Yay, you win!`;
-            reset();
-        } else if (computerScore === 5) {
-            resultDiv.innerHTML += `<br>You lose! better luck next time`;
-            reset();
-        } else {
             if (result.includes('Win')) {
                 playerScore += 1;
+                divDisplay();
+                showWinner();
             } else if (result.includes('Lose')) {
                 computerScore += 1;
+                divDisplay();
+                showWinner();
             } else {
                 playerScore += 1;
                 computerScore += 1;
+                divDisplay();
+                showWinner();
             }
             
-            resultDiv.innerHTML = `Result: ${result} 
-            <br>Round: ${round}
-            <br>Player score: ${playerScore}
-            <br>Computer score: ${computerScore}`;
 
+            function divDisplay() {
+                resultDiv.innerHTML = `Result: ${result} 
+                <br>Round: ${round}
+                <br>Player score: ${playerScore}
+                <br>Computer score: ${computerScore}`;
+            } 
+
+        function showWinner() {
+            if (playerScore === 5 && computerScore === 5) {
+                resultDiv.innerHTML += `<br>You tied! play again!`;
+                reset();
+            } else if (playerScore === 5) {
+                resultDiv.innerHTML += `<br>Yay, you win!`;
+                reset();
+            } else if (computerScore === 5) {
+                resultDiv.innerHTML += `<br>You lose! better luck next time`;
+                reset();
+            }
         }
 
-        round += 1;
-
-        
+        round += 1;      
     });
     
 }
