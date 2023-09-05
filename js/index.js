@@ -48,21 +48,19 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function getPlayerChoice() {
-  let playerSelection = prompt("Rock, Paper or Scissors?");
-  playerSelection =
-    playerSelection.slice(0, 1).toUpperCase() +
-    playerSelection.slice(1, playerSelection.length).toLowerCase();
-  return playerSelection;
-}
-
 function game() {
     let playerPoint = 0;
     let computerPoint = 0;
-  
-    for (let i = 0; i < 5; i++) {
-    let result = playRound(getPlayerChoice(), getComputerChoice());
-    console.log(result);
+    let result = "";
+    let round = 0;
+    const display = document.querySelector('.display')
+    const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let playerSelection = e.target.textContent;
+    result = playRound(playerSelection, getComputerChoice());
+    console.log(result)
     if (result.includes("Win")) {
       playerPoint += 1;
     } else if (result.includes("Lose")) {
@@ -71,21 +69,35 @@ function game() {
       playerPoint += 1;
       computerPoint += 1;
     }
-  }
-  
-  if (playerPoint === computerPoint) {
-    console.log(`It's a TIE!!!
-    Player score: ${playerPoint}
-    Computer score: ${computerPoint}`);
-  } else if (playerPoint > computerPoint) {
-    console.log(`YOU WON YAAAY!!!
-    Player score: ${playerPoint}
-    Computer score: ${computerPoint}`);
-  } else {
-    console.log(`LOSEEERRRR you lost!!!
-    Player score: ${playerPoint}
-    Computer score: ${computerPoint}`);
-  }
+    round += 1
+    console.log(`Player Score: ${ playerPoint}`);
+    console.log(`Computer Score ${computerPoint}`);
+    display.innerText = `Round: ${round}
+    Player Score: ${ playerPoint} 
+    Computer Score ${computerPoint}`;
 
+    if (round === 5) {
+      if (playerPoint === computerPoint) {
+        display.innerText = `It's a TIE!!!
+        Player score: ${playerPoint}
+        Computer score: ${computerPoint}`;
+      } else if (playerPoint > computerPoint) {
+        display.innerText = `YOU WON YAAAY!!!
+        Player score: ${playerPoint}
+        Computer score: ${computerPoint}`;
+      } else {
+        display.innerText = `LOSEEERRRR you lost!!!
+        Player score: ${playerPoint}
+        Computer score: ${computerPoint}`;
+      }
+
+      playerPoint = 0;
+      computerPoint = 0;
+      round = 0;
+      result = "";
+
+    }
+  });
+});
   return;
 }
